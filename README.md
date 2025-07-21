@@ -4,7 +4,7 @@ A simple Book Catalog web application built with **ASP.NET Core** for the backen
 
 ## 🔧 Technologies Used
 
-- **ASP.NET Core** (.NET 7 or later)
+- **ASP.NET Core** (.NET 8)
 - **Blazor Server**
 - **Entity Framework Core**
 - **SQL Server**
