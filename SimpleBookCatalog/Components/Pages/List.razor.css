@@ -1,0 +1,6 @@
+﻿.book-item {
+    padding: 0.4000rem; /* Equals to 4.6px*/
+    margin-bottom: 1rem; /* Equals to root element(<html>) font-size which is in most browsers 16px */
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+}

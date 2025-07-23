@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SimpleBookCatalog.Application\SimpleBookCatalog.Application.csproj" />
+    <ProjectReference Include="..\SimpleBookCatalog.Domain\SimpleBookCatalog.Domain.csproj" />
     <ProjectReference Include="..\SimpleBookCatalog.Infrastructure\SimpleBookCatalog.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,43 @@
+﻿@page "/BooksList"
+@inject IBookRepository BookRepository
+@attribute [StreamRendering]
+<PageTitle>
+    Book List
+</PageTitle>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <a href="/AddNew" class="btn btn-primary shadow-none mb-3">
+            Add New Book
+        </a>
+        @if (books is null)
+        {
+            <div class="book-item">
+                Loading books. Please wait...
+            </div>
+        }
+        else if (books.Any())
+        {
+            @foreach (var book in books)
+            {
+                <div class="book-item">
+                    <BookCard book_card="@book" />
+                </div>
+            }
+        }
+        else
+        {
+            <div class="book-item">
+                No books found.
+            </div>
+        }
+    </div>
+</div>
+@code {
+    private List<Book>? books;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000); // Concept of Streaming Rendering,Simulate a delay for loading
+        books = await BookRepository.GetAllAsync();
+    }
+}
