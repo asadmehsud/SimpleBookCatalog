@@ -4,81 +4,24 @@
 <PageTitle>
     Edit Book
 </PageTitle>
-@if (Book is not null)
-{
+
     <div class="row justify-content-center">
         <div class="col-6">
-            <EditForm method="post" Enhance="true" FormName="EditBookForm" OnValidSubmit="EditBook" Model="Book" autocomplete="off">
-                <h3>
-                    Edit Book @Id
-                    </h3>
-                <input type="hidden" name="Book.Id" value="@Book.Id" />
-                <div class="mb-3">
-                    <label for="title" class="form-label">
-                        Title
-                    </label>
-                    <InputText id="title" @bind-Value="Book.Title" class="form-control shadow-none" />
-                </div>
-                <div class="mb-3">
-                    <label for="author" class="form-label">
-                        Author
-                    </label>
-                    <InputText id="author" @bind-Value="Book.Author" class="form-control shadow-none" />
-                </div>
-                <div class="mb-3">
-                    <label for="publication-date" class="form-label">
-                        Date Published
-                    </label>
-                    <InputDate id="publication-date" @bind-Value="Book.PublicationDate" class="form-control shadow-none"></InputDate>
-                </div>
-                <div class="mb-3">
-                    <label for="category" class="form-label">
-                        Category
-                    </label>
-                    <InputSelect id="category" @bind-Value="Book.Category" class="form-control shadow-none">
-                        <option value="0">Select Category</option>
-                        @foreach (var category in Enum.GetValues(typeof(Category)))
-                        {
-                            <option value="@category">
-                                @category.ToString()
-                            </option>
-                        }
-                    </InputSelect>
-                </div>
-                <div>
-                    <button class="btn btn-primary shadow-none">
-                        Submit
-                    </button>
-                    <a href="/BooksList" class="btn btn-secondary shadow-none">
-                        Back To List
-                    </a>
-                </div>
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-            </EditForm>
+           <BookForm IsEditMode="true" BookId="@Id" OnValidBookSubmit="EditBook" />
         </div>
     </div>
-}
+
 @code {
 
     [Parameter]
     public int Id { get; set; }
 
-    [SupplyParameterFromForm]
-    public Book? Book { get; set; }
-
-    protected override async Task OnInitializedAsync()
+    
+    private async Task EditBook(Book book)
     {
-        Book ??= await BookRepository.GetByIdAsync(Id);
-    }
-
-    private async Task EditBook()
-    {
-        if (Book is not null)
-        {
-            await BookRepository.UpdateAsync(Book);
-            NavigationManager.NavigateTo("/BooksList");
-        }
        
+            await BookRepository.UpdateAsync(book);
+            NavigationManager.NavigateTo("/BooksList");
+   
     }
 }
